@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.core.net.toUri
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var btnDone: MaterialButton
+    private lateinit var btnNext: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +70,10 @@ class MainActivity : AppCompatActivity() {
         checkOverlayPermission()
 //        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
 //        setContentView(imageView)
+
+        btnDone = findViewById(R.id.btnScanned)
+        btnNext = findViewById(R.id.btnContinue)
+        btnNext.isEnabled = false
 
         // Example secret key — in real app, get from user input or stored value
         val secretKey = "JBSWY3DPEHPK3PXP"  // Base32 key
@@ -89,6 +96,15 @@ class MainActivity : AppCompatActivity() {
             } catch (e: WriterException) {
                 e.printStackTrace()
             }
+        }
+
+        btnDone.setOnClickListener {
+            btnNext.isEnabled = true
+        }
+
+        btnNext.setOnClickListener {
+            val intent = Intent(this, UnlockTVActivity::class.java)
+            startActivity(intent)
         }
     }
 }

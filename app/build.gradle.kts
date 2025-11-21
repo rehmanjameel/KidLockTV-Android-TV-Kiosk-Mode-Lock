@@ -48,4 +48,7 @@ dependencies {
 
     // qr code generator
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+
+    implementation("com.eatthepath:java-otp:0.4.0")
+
 }
